@@ -30,16 +30,16 @@ unix {
     PKGCONFIG += opencv
 
 }
-Win32 {
-    INCLUDEPATH += C:\OpenCV2.2\include\
-    LIBS += -LC:\OpenCV2.2\lib \
-    -lopencv_core220 \
-    -lopencv_highgui220 \
-    -lopencv_imgproc220 \
-    -lopencv_features2d220 \
-    -lopencv_calib3d220
-}
 
+INCLUDEPATH += D:\opencv\build\include
+
+LIBS += D:\opencv-build\bin\libopencv_core320.dll
+LIBS += D:\opencv-build\bin\libopencv_highgui320.dll
+LIBS += D:\opencv-build\bin\libopencv_imgcodecs320.dll
+LIBS += D:\opencv-build\bin\libopencv_imgproc320.dll
+LIBS += D:\opencv-build\bin\libopencv_features2d320.dll
+LIBS += D:\opencv-build\bin\libopencv_calib3d320.dll
+LIBS += D:\opencv-build\bin\libopencv_videoio320.dll
 
 # Default rules for deployment.
 
