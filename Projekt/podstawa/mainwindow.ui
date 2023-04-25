@@ -61,6 +61,13 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="Skora">
+      <property name="text">
+       <string>Skora</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QSlider" name="horizontalSlider">
       <property name="maximum">
        <number>255</number>

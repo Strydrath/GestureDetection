@@ -5,6 +5,7 @@
 #include <videothread.h>
 #include <QMainWindow>
 #include <QUdpSocket>
+#include <QSlider>
 
 namespace Ui {
 class MainWindow;
@@ -24,7 +25,6 @@ public:
     void setGestureText3(QString gesture);
 public slots:
     void onNewCamImg(QImage qimg);
-    void changeSlider();
 
 private slots:
     void on_pushButton_clicked();
@@ -45,10 +45,14 @@ private slots:
 
     void on_Green_clicked();
 
+    void on_Skora_clicked();
+
 private:
     Ui::MainWindow *ui;
     int hmin, smin, vmin, hmax, smax, vmax;
     cv::Scalar hsvmin, hsvmax;
+
+
 signals:
     void setScalarMin(cv::Scalar h1);
     void setScalarMax(cv::Scalar h1);

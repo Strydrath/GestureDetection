@@ -50,8 +50,8 @@ void videothread::run()
 
 
         //TU WPISUJEMY WSZYSTKO CO DZIEJE SIE Z NASZYM OBRAZEM Z KAMERY
-        min_val = cv::Scalar(43,42,41);
-        max_val = cv::Scalar(92, 149, 149);
+        //min_val = cv::Scalar(43,42,41);
+        //max_val = cv::Scalar(92, 149, 149);
 
         //min_val = cv::Scalar(0,60,130);
         //max_val = cv::Scalar(24, 255, 255);
