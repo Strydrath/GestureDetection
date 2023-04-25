@@ -24,6 +24,7 @@ public:
     void setGestureText3(QString gesture);
 public slots:
     void onNewCamImg(QImage qimg);
+    void changeSlider();
 
 private slots:
     void on_pushButton_clicked();

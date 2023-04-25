@@ -53,22 +53,26 @@ void videothread::run()
         min_val = cv::Scalar(43,42,41);
         max_val = cv::Scalar(92, 149, 149);
 
+        //min_val = cv::Scalar(0,60,130);
+        //max_val = cv::Scalar(24, 255, 255);
+
         //Segmentacja koloru skóry
         cv::Mat skinMask;
         cv::Rect rect;
         std::vector<cv::Point> hull_points;
         std::vector<cv::Point> def_points;
+        cv::Rect rect2;
 
         skin_segmentation(input_img, skinMask, min_val, max_val);
 
         //Detekcja wkleslosci i wypuklosci w konturze
-        feature_detection(skinMask, rect, hull_points, def_points);
+        feature_detection(skinMask, rect, rect2, hull_points, def_points);
 
         //prosta detekcja gestu otwarte-zamkniete
         gesture_detection(rect, hull_points, def_points);
 
         //zaznaczenie cech na obrazie
-        draw_features(input_img, rect, hull_points, def_points);
+        draw_features(input_img, rect, rect2, hull_points, def_points);
 
         msleep(1000/capture.get(cv::CAP_PROP_FPS));
         //Konwersja do QImage
@@ -141,7 +145,7 @@ void videothread::skin_segmentation(cv::Mat img, cv::Mat &mask, cv::Scalar min, 
 
 }
 
-void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv::Point> &hull_points, std::vector<cv::Point> &def_points)
+void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, cv::Rect &rect2, std::vector<cv::Point> &hull_points, std::vector<cv::Point> &def_points)
 {
 
     udpSocket = new QUdpSocket(this);
@@ -153,15 +157,26 @@ void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv
 
     double maxS = 0;
     int ci = 1;
+    double maxS2 = 0;
+    int ci2 = 1;
     cv::Rect rect1;
     for (int i = 0; i < contours.size(); i++)
     {
         double area = cv::contourArea(contours[i]);
-        if(area>maxS)
+        if (area > maxS)
         {
+            maxS2 = maxS;
+            ci2 = ci;
             maxS = area;
             ci = i;
         }
+
+        else if (area > maxS2 && i != ci)
+        {
+            maxS2 = area;
+            ci2 = i;
+        }
+
     }
 
     //estymacja powierzchni konturu prostokątem
@@ -183,6 +198,9 @@ void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv
         ByteData.append(m);
         udpSocket->writeDatagram(ByteData, QHostAddress::Broadcast, 42001);
 
+    }
+    if (maxS2 > 0){
+    rect2 = cv::boundingRect(contours[ci2]);
     }
 
     //detekcja wypukłości i wklęsłości konturu
@@ -309,9 +327,11 @@ void videothread::gesture_detection(cv::Rect rect, std::vector<cv::Point> hull_p
 
 }
 
-void videothread::draw_features(cv::Mat img, cv::Rect rect, std::vector<cv::Point> hull_points, std::vector<cv::Point> def_points)
+void videothread::draw_features(cv::Mat img, cv::Rect rect, cv::Rect rect2, std::vector<cv::Point> hull_points, std::vector<cv::Point> def_points)
 {
     cv::rectangle(img, rect, CV_RGB(255,255,255), 3, 8, 0);
+    cv::rectangle(img, rect2, CV_RGB(255,255,255), 3, 8, 0);
+
 }
 
 double videothread::dist(cv::Point p1, cv::Point p2)
