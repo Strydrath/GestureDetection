@@ -359,8 +359,8 @@ int endY = 0; // Współrzędna Y najpóźniejszego punktu w gestze
 
 bool swipeInProgress = false; // Czy gest swipe jest w trakcie wykonywania
 
-const int MIN_SWIPE_DISTANCE = 20; // Minimalna odległość, aby uznać gest za swipe w lewo
-const int MIN_SWIPE_SPEED = 70; // Minimalna prędkość, aby uznać gest za dynamiczny swipe w lewo
+const int MIN_SWIPE_DISTANCE = 40; // Minimalna odległość, aby uznać gest za swipe w lewo
+const int MIN_SWIPE_SPEED = 50; // Minimalna prędkość, aby uznać gest za dynamiczny swipe w lewo
 
 int prevTime = 0; // Czas ostatniego ruchu myszy
 
@@ -383,6 +383,9 @@ void videothread::handleMouseMove(cv::Mat img,int x, int y)
         // Oblicz prędkość ruchu
         int speed = 50*distance / qMax(1, static_cast<int>(qAbs((QDateTime::currentMSecsSinceEpoch() - prevTime))));
         qDebug() << speed;
+        putText(img, std::to_string(speed), cv::Point(150, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+        putText(img, std::to_string(distance), cv::Point(250, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+
 
         // Jeśli prędkość jest wystarczająco duża, uaktualnij współrzędne końcowe
         if (speed >= MIN_SWIPE_SPEED) {
@@ -396,7 +399,7 @@ void videothread::handleMouseMove(cv::Mat img,int x, int y)
 
     if (swipeInProgress && distance >= MIN_SWIPE_DISTANCE) {
         // Jeśli dystans jest wystarczająco duży, aby uznać go za gest swipe w lewo, wykonaj odpowiednie akcje
-        if (endX < startX) {
+        if (qAbs(endX - startX) > 30) {
             //qDebug() << "Dynamiczny swipe w lewo wykryty!"
             putText(img, "Wykryto gest!", cv::Point(50, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
 
