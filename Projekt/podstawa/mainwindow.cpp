@@ -129,12 +129,12 @@ void MainWindow::on_Green_clicked()
     ui->horizontalSlider_5->setValue(max2);
     ui->horizontalSlider_6->setValue(max3);
 
-    ui->label1->setText("min1\n" + QString::number(min1));
-    ui->label2->setText("min2\n" + QString::number(min2));
-    ui->label3->setText("min3\n" + QString::number(min3));
-    ui->label4->setText("max1\n" + QString::number(max1));
-    ui->label5->setText("max2\n" + QString::number(max2));
-    ui->label6->setText("max3\n" + QString::number(max3));
+    ui->label1->setText("h_min\n" + QString::number(min1));
+    ui->label2->setText("s_min\n" + QString::number(min2));
+    ui->label3->setText("v_min\n" + QString::number(min3));
+    ui->label4->setText("h_max\n" + QString::number(max1));
+    ui->label5->setText("s_max\n" + QString::number(max2));
+    ui->label6->setText("v_max\n" + QString::number(max3));
 
 
 }
@@ -166,59 +166,59 @@ void MainWindow::on_Skora_clicked()
     ui->horizontalSlider_5->setValue(max2);
     ui->horizontalSlider_6->setValue(max3);
 
-    ui->label1->setText("min1\n" + QString::number(min1));
-    ui->label2->setText("min2\n" + QString::number(min2));
-    ui->label3->setText("min3\n" + QString::number(min3));
-    ui->label4->setText("max1\n" + QString::number(max1));
-    ui->label5->setText("max2\n" + QString::number(max2));
-    ui->label6->setText("max3\n" + QString::number(max3));
+    ui->label1->setText("h_min\n" + QString::number(min1));
+    ui->label2->setText("s_min\n" + QString::number(min2));
+    ui->label3->setText("v_min\n" + QString::number(min3));
+    ui->label4->setText("h_max\n" + QString::number(max1));
+    ui->label5->setText("s_max\n" + QString::number(max2));
+    ui->label6->setText("v_max\n" + QString::number(max3));
 
 }
 
 
 void MainWindow::on_horizontalSlider_sliderMoved(int position)
 {
-     ui->label1->setText("min1\n" + QString::number(position));
+     ui->label1->setText("h_min\n" + QString::number(position));
 }
 
 
 void MainWindow::on_horizontalSlider_3_sliderMoved(int position)
 {
-    ui->label2->setText("min2\n" + QString::number(position));
+    ui->label2->setText("s_min\n" + QString::number(position));
 }
 
 
 void MainWindow::on_horizontalSlider_2_sliderMoved(int position)
 {
-    ui->label3->setText("min3\n" + QString::number(position));
+    ui->label3->setText("v_min\n" + QString::number(position));
 }
 
 
 void MainWindow::on_horizontalSlider_4_sliderMoved(int position)
 {
-    ui->label4->setText("max1\n" + QString::number(position));
+    ui->label4->setText("h_max\n" + QString::number(position));
 }
 
 
 void MainWindow::on_horizontalSlider_5_sliderMoved(int position)
 {
-    ui->label5->setText("max2\n" + QString::number(position));
+    ui->label5->setText("s_max\n" + QString::number(position));
 }
 
 
 void MainWindow::on_horizontalSlider_6_sliderMoved(int position)
 {
-    ui->label6->setText("max3\n" + QString::number(position));
+    ui->label6->setText("v_max\n" + QString::number(position));
 }
 
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    int min1 = 0;
+    int min1 = 20;
     int min2 = 100;
     int min3 = 100;
 
-    int max1 = 10;
+    int max1 = 40;
     int max2= 255;
     int max3 = 255;
 
@@ -236,11 +236,11 @@ void MainWindow::on_pushButton_2_clicked()
     ui->horizontalSlider_5->setValue(max2);
     ui->horizontalSlider_6->setValue(max3);
 
-    ui->label1->setText("min1\n" + QString::number(min1));
-    ui->label2->setText("min2\n" + QString::number(min2));
-    ui->label3->setText("min3\n" + QString::number(min3));
-    ui->label4->setText("max1\n" + QString::number(max1));
-    ui->label5->setText("max2\n" + QString::number(max2));
-    ui->label6->setText("max3\n" + QString::number(max3));
+    ui->label1->setText("h_min\n" + QString::number(min1));
+    ui->label2->setText("s_min\n" + QString::number(min2));
+    ui->label3->setText("v_min\n" + QString::number(min3));
+    ui->label4->setText("h_max\n" + QString::number(max1));
+    ui->label5->setText("s_max\n" + QString::number(max2));
+    ui->label6->setText("v_max\n" + QString::number(max3));
 }
 

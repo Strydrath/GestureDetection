@@ -161,6 +161,9 @@ void videothread::feature_detection(cv::Mat img,cv::Mat mask, cv::Rect &rect, cv
     int ci = 1;
     double maxS2 = 0;
     int ci2 = 1;
+    int y1 = 0;
+    int y3 = 0;
+    int y_mean = 0;
     cv::Rect rect1;
     for (int i = 0; i < contours.size(); i++)
     {
@@ -193,19 +196,27 @@ void videothread::feature_detection(cv::Mat img,cv::Mat mask, cv::Rect &rect, cv
         int y = rect.y/2;
 
         //skalowanie
-        int y1 = 180 - ((y - 100) * 1.8 + 180);
-        //qDebug()<<y1;
-        QByteArray ByteData;
-        QString m = trUtf8("sensor-update info od Marcin %1").arg(y1);
-        ByteData.append(m);
-        udpSocket->writeDatagram(ByteData, QHostAddress::Broadcast, 42001);
+        y1 = 180 - ((y - 100) * 1.8 + 180);
+        if (y1 < -180){ y1 = -180;}
         handleMouseMove(img,x,y);
 
 
     }
     if (maxS2 > 0){
     rect2 = cv::boundingRect(contours[ci2]);
+
+        int x2 = rect2.x/2;
+        int y2 = rect2.y/2;
+        y3 = 180 - ((y2 - 100) * 1.8 + 180);
+        if (y3 < -180){ y3 = -180;}
+
     }
+
+    y_mean = (y1+y3)/2;
+    QByteArray ByteData;
+    QString message = trUtf8("sensor-update info od Marcin %1").arg(y_mean);
+    ByteData.append(message);
+    udpSocket->writeDatagram(ByteData, QHostAddress::Broadcast, 42001);
 
     //detekcja wypukłości i wklęsłości konturu
     std::vector<std::vector<cv::Point> >hull( contours.size() );
@@ -335,8 +346,8 @@ void videothread::gesture_detection(cv::Rect rect, std::vector<cv::Point> hull_p
 
 void videothread::draw_features(cv::Mat img, cv::Rect rect, cv::Rect rect2, std::vector<cv::Point> hull_points, std::vector<cv::Point> def_points)
 {
-    cv::rectangle(img, rect, CV_RGB(255,255,255), 3, 8, 0);
-    cv::rectangle(img, rect2, CV_RGB(255,255,255), 3, 8, 0);
+    cv::rectangle(img, rect, CV_RGB(0,255,0), 3, 8, 0);
+    cv::rectangle(img, rect2, CV_RGB(0,0,255), 3, 8, 0);
 
 }
 
@@ -359,7 +370,7 @@ int endY = 0; // Współrzędna Y najpóźniejszego punktu w gestze
 
 bool swipeInProgress = false; // Czy gest swipe jest w trakcie wykonywania
 
-const int MIN_SWIPE_DISTANCE = 40; // Minimalna odległość, aby uznać gest za swipe w lewo
+const int MIN_SWIPE_DISTANCE = 50; // Minimalna odległość, aby uznać gest za swipe w lewo
 const int MIN_SWIPE_SPEED = 50; // Minimalna prędkość, aby uznać gest za dynamiczny swipe w lewo
 
 int prevTime = 0; // Czas ostatniego ruchu myszy
@@ -382,9 +393,9 @@ void videothread::handleMouseMove(cv::Mat img,int x, int y)
 
         // Oblicz prędkość ruchu
         int speed = 50*distance / qMax(1, static_cast<int>(qAbs((QDateTime::currentMSecsSinceEpoch() - prevTime))));
-        qDebug() << speed;
-        putText(img, std::to_string(speed), cv::Point(150, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
-        putText(img, std::to_string(distance), cv::Point(250, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+        //qDebug() << speed;
+        putText(img, std::to_string(speed), cv::Point(450, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+        putText(img, std::to_string(distance), cv::Point(550, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
 
 
         // Jeśli prędkość jest wystarczająco duża, uaktualnij współrzędne końcowe
@@ -399,9 +410,9 @@ void videothread::handleMouseMove(cv::Mat img,int x, int y)
 
     if (swipeInProgress && distance >= MIN_SWIPE_DISTANCE) {
         // Jeśli dystans jest wystarczająco duży, aby uznać go za gest swipe w lewo, wykonaj odpowiednie akcje
-        if (qAbs(endX - startX) > 30) {
+        if ((endX - startX) > MIN_SWIPE_DISTANCE) {
             //qDebug() << "Dynamiczny swipe w lewo wykryty!"
-            putText(img, "Wykryto gest!", cv::Point(50, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+            putText(img, "Wykryto gest!", cv::Point(0, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
 
         }
 
