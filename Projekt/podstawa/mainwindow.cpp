@@ -108,13 +108,22 @@ void MainWindow::on_Green_clicked()
 {
 
 
-    int min1 = 43;
-    int min2 = 42;
-    int min3 = 41;
+    //int min1 = 43;
+    //int min2 = 42;
+    //int min3 = 41;
 
-    int max1 = 92;
-    int max2= 149;
-    int max3 = 149;
+    //int max1 = 92;
+    //int max2= 149;
+    //int max3 = 149;
+
+
+    int min1 = 35;
+    int min2 = 50;
+    int min3 = 50;
+
+    int max1 = 80;
+    int max2= 255;
+    int max3 = 255;
 
     hsvmin = cv::Scalar(min1,min2,min3);
     hsvmax = cv::Scalar(max1,max2,max3);
