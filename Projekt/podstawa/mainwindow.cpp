@@ -107,8 +107,7 @@ void MainWindow::on_lineEdit_inputRejected()
 void MainWindow::on_Green_clicked()
 {
 
-    hsvmin = cv::Scalar(43,42,41);
-    hsvmax = cv::Scalar(92,149,149);
+
     int min1 = 43;
     int min2 = 42;
     int min3 = 41;
@@ -116,6 +115,9 @@ void MainWindow::on_Green_clicked()
     int max1 = 92;
     int max2= 149;
     int max3 = 149;
+
+    hsvmin = cv::Scalar(min1,min2,min3);
+    hsvmax = cv::Scalar(max1,max2,max3);
 
 
     emit setScalarMin(hsvmin);
@@ -127,14 +129,21 @@ void MainWindow::on_Green_clicked()
     ui->horizontalSlider_5->setValue(max2);
     ui->horizontalSlider_6->setValue(max3);
 
+    ui->label1->setText("min1\n" + QString::number(min1));
+    ui->label2->setText("min2\n" + QString::number(min2));
+    ui->label3->setText("min3\n" + QString::number(min3));
+    ui->label4->setText("max1\n" + QString::number(max1));
+    ui->label5->setText("max2\n" + QString::number(max2));
+    ui->label6->setText("max3\n" + QString::number(max3));
+
+
 }
 
 
 
 void MainWindow::on_Skora_clicked()
 {
-    hsvmin = cv::Scalar(0,60,130);
-    hsvmax = cv::Scalar(24, 255, 255);
+
     int min1 = 0;
     int min2 = 60;
     int min3 = 130;
@@ -144,6 +153,10 @@ void MainWindow::on_Skora_clicked()
     int max3 = 255;
 
 
+    hsvmin = cv::Scalar(min1,min2,min3);
+    hsvmax = cv::Scalar(max1, max2, max3);
+
+
     emit setScalarMin(hsvmin);
     emit setScalarMin(hsvmin);
     ui->horizontalSlider->setValue(min1);
@@ -153,5 +166,81 @@ void MainWindow::on_Skora_clicked()
     ui->horizontalSlider_5->setValue(max2);
     ui->horizontalSlider_6->setValue(max3);
 
+    ui->label1->setText("min1\n" + QString::number(min1));
+    ui->label2->setText("min2\n" + QString::number(min2));
+    ui->label3->setText("min3\n" + QString::number(min3));
+    ui->label4->setText("max1\n" + QString::number(max1));
+    ui->label5->setText("max2\n" + QString::number(max2));
+    ui->label6->setText("max3\n" + QString::number(max3));
+
+}
+
+
+void MainWindow::on_horizontalSlider_sliderMoved(int position)
+{
+     ui->label1->setText("min1\n" + QString::number(position));
+}
+
+
+void MainWindow::on_horizontalSlider_3_sliderMoved(int position)
+{
+    ui->label2->setText("min2\n" + QString::number(position));
+}
+
+
+void MainWindow::on_horizontalSlider_2_sliderMoved(int position)
+{
+    ui->label3->setText("min3\n" + QString::number(position));
+}
+
+
+void MainWindow::on_horizontalSlider_4_sliderMoved(int position)
+{
+    ui->label4->setText("max1\n" + QString::number(position));
+}
+
+
+void MainWindow::on_horizontalSlider_5_sliderMoved(int position)
+{
+    ui->label5->setText("max2\n" + QString::number(position));
+}
+
+
+void MainWindow::on_horizontalSlider_6_sliderMoved(int position)
+{
+    ui->label6->setText("max3\n" + QString::number(position));
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    int min1 = 0;
+    int min2 = 100;
+    int min3 = 100;
+
+    int max1 = 10;
+    int max2= 255;
+    int max3 = 255;
+
+
+    hsvmin = cv::Scalar(min1,min2,min3);
+    hsvmax = cv::Scalar(max1, max2, max3);
+
+
+    emit setScalarMin(hsvmin);
+    emit setScalarMin(hsvmin);
+    ui->horizontalSlider->setValue(min1);
+    ui->horizontalSlider_3->setValue(min2);
+    ui->horizontalSlider_2->setValue(min3);
+    ui->horizontalSlider_4->setValue(max1);
+    ui->horizontalSlider_5->setValue(max2);
+    ui->horizontalSlider_6->setValue(max3);
+
+    ui->label1->setText("min1\n" + QString::number(min1));
+    ui->label2->setText("min2\n" + QString::number(min2));
+    ui->label3->setText("min3\n" + QString::number(min3));
+    ui->label4->setText("max1\n" + QString::number(max1));
+    ui->label5->setText("max2\n" + QString::number(max2));
+    ui->label6->setText("max3\n" + QString::number(max3));
 }
 

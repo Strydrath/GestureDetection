@@ -47,6 +47,20 @@ private slots:
 
     void on_Skora_clicked();
 
+    void on_horizontalSlider_sliderMoved(int position);
+
+    void on_horizontalSlider_3_sliderMoved(int position);
+
+    void on_horizontalSlider_2_sliderMoved(int position);
+
+    void on_horizontalSlider_4_sliderMoved(int position);
+
+    void on_horizontalSlider_5_sliderMoved(int position);
+
+    void on_horizontalSlider_6_sliderMoved(int position);
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     int hmin, smin, vmin, hmax, smax, vmax;
