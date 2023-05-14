@@ -1,11 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 
     camImg = new videothread(this);
 
@@ -17,7 +21,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(camImg, &videothread::gestureDetected2, this, &MainWindow::setGestureText2);
     connect(camImg, &videothread::gestureDetected3, this, &MainWindow::setGestureText3);
 
+
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -100,9 +106,52 @@ void MainWindow::on_lineEdit_inputRejected()
 
 void MainWindow::on_Green_clicked()
 {
+
     hsvmin = cv::Scalar(43,42,41);
     hsvmax = cv::Scalar(92,149,149);
+    int min1 = 43;
+    int min2 = 42;
+    int min3 = 41;
+
+    int max1 = 92;
+    int max2= 149;
+    int max3 = 149;
+
+
     emit setScalarMin(hsvmin);
     emit setScalarMin(hsvmin);
+    ui->horizontalSlider->setValue(min1);
+    ui->horizontalSlider_3->setValue(min2);
+    ui->horizontalSlider_2->setValue(min3);
+    ui->horizontalSlider_4->setValue(max1);
+    ui->horizontalSlider_5->setValue(max2);
+    ui->horizontalSlider_6->setValue(max3);
+
+}
+
+
+
+void MainWindow::on_Skora_clicked()
+{
+    hsvmin = cv::Scalar(0,60,130);
+    hsvmax = cv::Scalar(24, 255, 255);
+    int min1 = 0;
+    int min2 = 60;
+    int min3 = 130;
+
+    int max1 = 24;
+    int max2= 255;
+    int max3 = 255;
+
+
+    emit setScalarMin(hsvmin);
+    emit setScalarMin(hsvmin);
+    ui->horizontalSlider->setValue(min1);
+    ui->horizontalSlider_3->setValue(min2);
+    ui->horizontalSlider_2->setValue(min3);
+    ui->horizontalSlider_4->setValue(max1);
+    ui->horizontalSlider_5->setValue(max2);
+    ui->horizontalSlider_6->setValue(max3);
+
 }
 

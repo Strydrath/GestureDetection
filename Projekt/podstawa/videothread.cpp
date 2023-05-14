@@ -1,5 +1,7 @@
 #include "videothread.h"
 #include <opencv2/opencv.hpp>
+#include <QtCore/qglobal.h>
+
 
 videothread::videothread(QObject *parent) :
     QThread(parent)
@@ -50,25 +52,29 @@ void videothread::run()
 
 
         //TU WPISUJEMY WSZYSTKO CO DZIEJE SIE Z NASZYM OBRAZEM Z KAMERY
-        min_val = cv::Scalar(43,42,41);
-        max_val = cv::Scalar(92, 149, 149);
+        //min_val = cv::Scalar(43,42,41);
+        //max_val = cv::Scalar(92, 149, 149);
+
+        //min_val = cv::Scalar(0,60,130);
+        //max_val = cv::Scalar(24, 255, 255);
 
         //Segmentacja koloru skóry
         cv::Mat skinMask;
         cv::Rect rect;
         std::vector<cv::Point> hull_points;
         std::vector<cv::Point> def_points;
+        cv::Rect rect2;
 
         skin_segmentation(input_img, skinMask, min_val, max_val);
 
         //Detekcja wkleslosci i wypuklosci w konturze
-        feature_detection(skinMask, rect, hull_points, def_points);
+        feature_detection(input_img, skinMask, rect, rect2, hull_points, def_points);
 
         //prosta detekcja gestu otwarte-zamkniete
         gesture_detection(rect, hull_points, def_points);
 
         //zaznaczenie cech na obrazie
-        draw_features(input_img, rect, hull_points, def_points);
+        draw_features(input_img, rect, rect2, hull_points, def_points);
 
         msleep(1000/capture.get(cv::CAP_PROP_FPS));
         //Konwersja do QImage
@@ -107,7 +113,7 @@ QImage videothread::qinputimage(const cv::Mat &mat)
     }
     else
     {
-        qDebug() << "ERROR: Mat could not be converted to QImage.";
+        //qDebug() << "ERROR: Mat could not be converted to QImage.";
         return QImage();
     }
 }
@@ -115,13 +121,13 @@ QImage videothread::qinputimage(const cv::Mat &mat)
 void videothread::getScalarMin(cv::Scalar s1)
 {
     min_val = s1;
-    qDebug()<<s1.val[0]<<";"<<s1.val[1]<<";"<<s1.val[2];
+    //qDebug()<<s1.val[0]<<";"<<s1.val[1]<<";"<<s1.val[2];
 
 }
 void videothread::getScalarMax(cv::Scalar s1)
 {
     max_val = s1;
-    qDebug()<<s1.val[0]<<";"<<s1.val[1]<<";"<<s1.val[2];
+    //qDebug()<<s1.val[0]<<";"<<s1.val[1]<<";"<<s1.val[2];
 
 }
 
@@ -141,7 +147,7 @@ void videothread::skin_segmentation(cv::Mat img, cv::Mat &mask, cv::Scalar min, 
 
 }
 
-void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv::Point> &hull_points, std::vector<cv::Point> &def_points)
+void videothread::feature_detection(cv::Mat img,cv::Mat mask, cv::Rect &rect, cv::Rect &rect2, std::vector<cv::Point> &hull_points, std::vector<cv::Point> &def_points)
 {
 
     udpSocket = new QUdpSocket(this);
@@ -153,15 +159,26 @@ void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv
 
     double maxS = 0;
     int ci = 1;
+    double maxS2 = 0;
+    int ci2 = 1;
     cv::Rect rect1;
     for (int i = 0; i < contours.size(); i++)
     {
         double area = cv::contourArea(contours[i]);
-        if(area>maxS)
+        if (area > maxS)
         {
+            maxS2 = maxS;
+            ci2 = ci;
             maxS = area;
             ci = i;
         }
+
+        else if (area > maxS2 && i != ci)
+        {
+            maxS2 = area;
+            ci2 = i;
+        }
+
     }
 
     //estymacja powierzchni konturu prostokątem
@@ -177,12 +194,17 @@ void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv
 
         //skalowanie
         int y1 = 180 - ((y - 100) * 1.8 + 180);
-        qDebug()<<y1;
+        //qDebug()<<y1;
         QByteArray ByteData;
         QString m = trUtf8("sensor-update info od Marcin %1").arg(y1);
         ByteData.append(m);
         udpSocket->writeDatagram(ByteData, QHostAddress::Broadcast, 42001);
+        handleMouseMove(img,x,y);
 
+
+    }
+    if (maxS2 > 0){
+    rect2 = cv::boundingRect(contours[ci2]);
     }
 
     //detekcja wypukłości i wklęsłości konturu
@@ -203,7 +225,7 @@ void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv
         }
         catch (cv::Exception& e)
         {
-            qDebug()<<e.what();
+            //qDebug()<<e.what();
         }
 
         int nm1 = 20;
@@ -228,6 +250,8 @@ void videothread::feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv
             }
         }
     }
+
+
 
 }
 
@@ -309,9 +333,11 @@ void videothread::gesture_detection(cv::Rect rect, std::vector<cv::Point> hull_p
 
 }
 
-void videothread::draw_features(cv::Mat img, cv::Rect rect, std::vector<cv::Point> hull_points, std::vector<cv::Point> def_points)
+void videothread::draw_features(cv::Mat img, cv::Rect rect, cv::Rect rect2, std::vector<cv::Point> hull_points, std::vector<cv::Point> def_points)
 {
     cv::rectangle(img, rect, CV_RGB(255,255,255), 3, 8, 0);
+    cv::rectangle(img, rect2, CV_RGB(255,255,255), 3, 8, 0);
+
 }
 
 double videothread::dist(cv::Point p1, cv::Point p2)
@@ -319,3 +345,80 @@ double videothread::dist(cv::Point p1, cv::Point p2)
     double dist = sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
     return dist;
 }
+
+
+
+int prevX = 0; // Współrzędna X poprzedniego punktu
+int prevY = 0; // Współrzędna Y poprzedniego punktu
+
+int startX = 0; // Współrzędna X najwcześniejszego punktu w gestze
+int startY = 0; // Współrzędna Y najwcześniejszego punktu w gestze
+
+int endX = 0; // Współrzędna X najpóźniejszego punktu w gestze
+int endY = 0; // Współrzędna Y najpóźniejszego punktu w gestze
+
+bool swipeInProgress = false; // Czy gest swipe jest w trakcie wykonywania
+
+const int MIN_SWIPE_DISTANCE = 40; // Minimalna odległość, aby uznać gest za swipe w lewo
+const int MIN_SWIPE_SPEED = 50; // Minimalna prędkość, aby uznać gest za dynamiczny swipe w lewo
+
+int prevTime = 0; // Czas ostatniego ruchu myszy
+
+
+
+void videothread::handleMouseMove(cv::Mat img,int x, int y)
+{
+    if (!swipeInProgress) {
+        // Jeśli nie jest wykrywany gest swipe, zapisz bieżące współrzędne jako punkt początkowy
+        startX = x;
+        startY = y;
+        endX = x;
+        endY = y;
+        swipeInProgress = true;
+    } else {
+        // Oblicz dystans między bieżącym punktem a poprzednim punktem
+        int distance = qSqrt(qPow(x - prevX, 2) + qPow(y - prevY, 2));
+         //qDebug() << distance;
+
+        // Oblicz prędkość ruchu
+        int speed = 50*distance / qMax(1, static_cast<int>(qAbs((QDateTime::currentMSecsSinceEpoch() - prevTime))));
+        qDebug() << speed;
+        putText(img, std::to_string(speed), cv::Point(150, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+        putText(img, std::to_string(distance), cv::Point(250, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+
+
+        // Jeśli prędkość jest wystarczająco duża, uaktualnij współrzędne końcowe
+        if (speed >= MIN_SWIPE_SPEED) {
+            endX = x;
+            endY = y;
+        }
+    }
+
+    // Oblicz dystans między punktami początkowym i końcowym
+    int distance = qAbs(startX - endX);
+
+    if (swipeInProgress && distance >= MIN_SWIPE_DISTANCE) {
+        // Jeśli dystans jest wystarczająco duży, aby uznać go za gest swipe w lewo, wykonaj odpowiednie akcje
+        if (qAbs(endX - startX) > 30) {
+            //qDebug() << "Dynamiczny swipe w lewo wykryty!"
+            putText(img, "Wykryto gest!", cv::Point(50, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+
+        }
+
+
+        // Zresetuj zmienne
+        prevX = 0;
+        prevY = 0;
+        startX = 0;
+        startY = 0;
+        endX = 0;
+        endY = 0;
+        swipeInProgress = false;
+        }
+
+        // Zapisz bieżące współrzędne jako poprzednie punkty
+        prevX = x;
+        prevY = y;
+        prevTime = QDateTime::currentMSecsSinceEpoch();
+
+   }

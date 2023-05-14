@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 5.0.2, 2023-04-18T09:31:49. -->
+=======
+<!-- Written by QtCreator 5.0.2, 2023-04-25T11:19:22. -->
+>>>>>>> Marcin
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -235,9 +239,14 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Lab2_gesture2</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/administrator/Documents/180161/Projekt/podstawa/Lab2_gesture.pro</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/administrator/Documents/180161/Projekt/podstawa/Lab2_gesture.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/administrator/Documents/180161/projekt_git/GestureDetection/Projekt/podstawa/Lab2_gesture.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/administrator/Documents/180161/projekt_git/GestureDetection/Projekt/podstawa/Lab2_gesture.pro</value>
+>>>>>>> Marcin
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

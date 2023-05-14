@@ -23,6 +23,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include "opencv2/highgui/highgui_c.h"
+#include <QtCore/qglobal.h>
+
 
 
 
@@ -52,11 +54,11 @@ private:
     int frame_count;
 
     void skin_segmentation(cv::Mat img, cv::Mat &mask, cv::Scalar min, cv::Scalar max);
-    void feature_detection(cv::Mat mask, cv::Rect &rect, std::vector<cv::Point> &hull_points, std::vector<cv::Point> &def_points);
+    void feature_detection(cv::Mat img,cv::Mat mask, cv::Rect &rect, cv::Rect &rect2, std::vector<cv::Point> &hull_points, std::vector<cv::Point> &def_points);
 
     void gesture_detection(cv::Rect rect, std::vector<cv::Point> hull_points, std::vector<cv::Point> def_points);
-    void draw_features(cv::Mat img, cv::Rect rect, std::vector<cv::Point> hull_points, std::vector<cv::Point> def_points);
-
+    void draw_features(cv::Mat img, cv::Rect rect,cv::Rect rect2, std::vector<cv::Point> hull_points, std::vector<cv::Point> def_points);
+    void handleMouseMove(cv::Mat img,int x, int y);
     double dist(cv::Point p1, cv::Point p2);
 signals:
     void NewCamImg(QImage);
