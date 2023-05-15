@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = HCI_gesture11.0.0
-DISTDIR = /home/administrator/Documents/180161/GestureDetection-Marcin/Projekt/build-Lab2_gesture-Desktop_Qt_5_12_12_GCC_64bit-Debug/.tmp/HCI_gesture11.0.0
+DISTDIR = /home/administrator/Documents/180161/projekt_git/GestureDetection/Projekt/build-Lab2_gesture-Desktop_Qt_5_12_12_GCC_64bit-Debug/.tmp/HCI_gesture11.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/administrator/Qt5.12.12/5.12.12/gcc_64/lib
 LIBS          = $(SUBLIBS) -lopencv_shape -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_datasets -lopencv_dpm -lopencv_face -lopencv_freetype -lopencv_fuzzy -lopencv_hdf -lopencv_line_descriptor -lopencv_optflow -lopencv_video -lopencv_plot -lopencv_reg -lopencv_saliency -lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_rgbd -lopencv_viz -lopencv_surface_matching -lopencv_text -lopencv_ximgproc -lopencv_calib3d -lopencv_features2d -lopencv_flann -lopencv_xobjdetect -lopencv_objdetect -lopencv_ml -lopencv_xphoto -lopencv_highgui -lopencv_videoio -lopencv_imgcodecs -lopencv_photo -lopencv_imgproc -lopencv_core /home/administrator/Qt5.12.12/5.12.12/gcc_64/lib/libQt5Widgets.so /home/administrator/Qt5.12.12/5.12.12/gcc_64/lib/libQt5Gui.so /home/administrator/Qt5.12.12/5.12.12/gcc_64/lib/libQt5Network.so /home/administrator/Qt5.12.12/5.12.12/gcc_64/lib/libQt5Core.so -lGL -lpthread   
@@ -962,7 +962,7 @@ moc_mainwindow.cpp: ../podstawa/mainwindow.h \
 		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qabstractslider.h \
 		moc_predefs.h \
 		/home/administrator/Qt5.12.12/5.12.12/gcc_64/bin/moc
-	/home/administrator/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/administrator/Documents/180161/GestureDetection-Marcin/Projekt/build-Lab2_gesture-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/administrator/Documents/180161/GestureDetection-Marcin/Projekt/podstawa -I/usr/include/opencv -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../podstawa/mainwindow.h -o moc_mainwindow.cpp
+	/home/administrator/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/administrator/Documents/180161/projekt_git/GestureDetection/Projekt/build-Lab2_gesture-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/administrator/Documents/180161/projekt_git/GestureDetection/Projekt/podstawa -I/usr/include/opencv -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../podstawa/mainwindow.h -o moc_mainwindow.cpp
 
 moc_videothread.cpp: ../podstawa/videothread.h \
 		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QThread \
@@ -1209,7 +1209,7 @@ moc_videothread.cpp: ../podstawa/videothread.h \
 		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork/qhostaddress.h \
 		moc_predefs.h \
 		/home/administrator/Qt5.12.12/5.12.12/gcc_64/bin/moc
-	/home/administrator/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/administrator/Documents/180161/GestureDetection-Marcin/Projekt/build-Lab2_gesture-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/administrator/Documents/180161/GestureDetection-Marcin/Projekt/podstawa -I/usr/include/opencv -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../podstawa/videothread.h -o moc_videothread.cpp
+	/home/administrator/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/administrator/Documents/180161/projekt_git/GestureDetection/Projekt/build-Lab2_gesture-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/administrator/Documents/180161/projekt_git/GestureDetection/Projekt/podstawa -I/usr/include/opencv -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtNetwork -I/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../podstawa/videothread.h -o moc_videothread.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1733,7 +1733,41 @@ mainwindow.o: ../podstawa/mainwindow.cpp ../podstawa/mainwindow.h \
 		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QSlider \
 		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qslider.h \
 		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qabstractslider.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QVariant \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QApplication \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qapplication.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qguiapplication.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qinputmethod.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QFrame \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qframe.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QLabel \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlabel.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QLineEdit \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlineedit.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtextcursor.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtextformat.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qpen.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtextoption.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QMenuBar \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qmenu.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qaction.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QPushButton \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QStatusBar \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QToolBar \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtoolbar.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QVBoxLayout \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlayout.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qgridlayout.h \
+		/home/administrator/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../podstawa/mainwindow.cpp
 
 videothread.o: ../podstawa/videothread.cpp ../podstawa/videothread.h \

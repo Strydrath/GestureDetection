@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -35,6 +36,7 @@ public:
     QLineEdit *lineEdit_2;
     QLineEdit *lineEdit_3;
     QPushButton *pushButton;
+    QPushButton *pushButton_2;
     QPushButton *Green;
     QPushButton *Skora;
     QSlider *horizontalSlider;
@@ -43,6 +45,13 @@ public:
     QSlider *horizontalSlider_4;
     QSlider *horizontalSlider_5;
     QSlider *horizontalSlider_6;
+    QHBoxLayout *horizontalLayout;
+    QLabel *label1;
+    QLabel *label2;
+    QLabel *label3;
+    QLabel *label4;
+    QLabel *label5;
+    QLabel *label6;
     QFrame *line;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -52,7 +61,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(692, 603);
+        MainWindow->resize(708, 954);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -67,6 +76,7 @@ public:
         sizePolicy.setHeightForWidth(img->sizePolicy().hasHeightForWidth());
         img->setSizePolicy(sizePolicy);
         img->setMinimumSize(QSize(300, 0));
+        img->setMaximumSize(QSize(16777215, 400));
         img->setFrameShape(QFrame::Box);
 
         verticalLayout->addWidget(img);
@@ -90,6 +100,11 @@ public:
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
 
         verticalLayout->addWidget(pushButton);
+
+        pushButton_2 = new QPushButton(centralWidget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        verticalLayout->addWidget(pushButton_2);
 
         Green = new QPushButton(centralWidget);
         Green->setObjectName(QString::fromUtf8("Green"));
@@ -149,6 +164,50 @@ public:
 
         verticalLayout->addWidget(horizontalSlider_6);
 
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        label1 = new QLabel(centralWidget);
+        label1->setObjectName(QString::fromUtf8("label1"));
+        label1->setMaximumSize(QSize(16777215, 100));
+        label1->setLayoutDirection(Qt::LeftToRight);
+
+        horizontalLayout->addWidget(label1);
+
+        label2 = new QLabel(centralWidget);
+        label2->setObjectName(QString::fromUtf8("label2"));
+        label2->setMaximumSize(QSize(16777215, 100));
+
+        horizontalLayout->addWidget(label2);
+
+        label3 = new QLabel(centralWidget);
+        label3->setObjectName(QString::fromUtf8("label3"));
+        label3->setMaximumSize(QSize(16777215, 100));
+
+        horizontalLayout->addWidget(label3);
+
+        label4 = new QLabel(centralWidget);
+        label4->setObjectName(QString::fromUtf8("label4"));
+        label4->setMaximumSize(QSize(16777215, 100));
+
+        horizontalLayout->addWidget(label4);
+
+        label5 = new QLabel(centralWidget);
+        label5->setObjectName(QString::fromUtf8("label5"));
+        label5->setMaximumSize(QSize(100, 100));
+
+        horizontalLayout->addWidget(label5);
+
+        label6 = new QLabel(centralWidget);
+        label6->setObjectName(QString::fromUtf8("label6"));
+        label6->setEnabled(true);
+        label6->setMaximumSize(QSize(100, 100));
+
+        horizontalLayout->addWidget(label6);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
         line = new QFrame(centralWidget);
         line->setObjectName(QString::fromUtf8("line"));
         line->setFrameShape(QFrame::HLine);
@@ -159,7 +218,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 692, 22));
+        menuBar->setGeometry(QRect(0, 0, 708, 21));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -178,8 +237,15 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         img->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
         pushButton->setText(QApplication::translate("MainWindow", "PLAY FROM FILE", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Yellow", nullptr));
         Green->setText(QApplication::translate("MainWindow", "Green", nullptr));
         Skora->setText(QApplication::translate("MainWindow", "Skora", nullptr));
+        label1->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        label2->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        label3->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        label4->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        label5->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        label6->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
     } // retranslateUi
 
 };

@@ -370,10 +370,13 @@ int endY = 0; // Współrzędna Y najpóźniejszego punktu w gestze
 
 bool swipeInProgress = false; // Czy gest swipe jest w trakcie wykonywania
 
-const int MIN_SWIPE_DISTANCE = 50; // Minimalna odległość, aby uznać gest za swipe w lewo
-const int MIN_SWIPE_SPEED = 50; // Minimalna prędkość, aby uznać gest za dynamiczny swipe w lewo
+const int MIN_SWIPE_DISTANCE = 10; // Minimalna odległość, aby uznać gest za swipe w lewo
+const int MIN_SWIPE_SPEED = 30; // Minimalna prędkość, aby uznać gest za dynamiczny swipe w lewo
 
 int prevTime = 0; // Czas ostatniego ruchu myszy
+
+
+
 
 
 
@@ -413,6 +416,10 @@ void videothread::handleMouseMove(cv::Mat img,int x, int y)
         if ((endX - startX) > MIN_SWIPE_DISTANCE) {
             //qDebug() << "Dynamiczny swipe w lewo wykryty!"
             putText(img, "Wykryto gest!", cv::Point(0, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+            QByteArray ByteData;
+            QString message = trUtf8("gest%1").arg(255);
+            ByteData.append(message);
+            udpSocket->writeDatagram(ByteData, QHostAddress::Broadcast, 42001);
 
         }
 
