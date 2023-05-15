@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     udpSocket = new QUdpSocket(this);
-    udpSocket->bind(42001);
+    udpSocket->bind(12311);
     //udpSocket->bind(1234);
     connect(udpSocket, SIGNAL(readyRead()), this, SLOT(ReadAndProcessData()));
 }

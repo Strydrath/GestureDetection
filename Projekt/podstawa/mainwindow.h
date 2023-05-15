@@ -20,6 +20,7 @@ public:
     ~MainWindow();
 
     videothread *camImg;
+    QUdpSocket *udpSocket;
     void setGestureText1(QString gesture);
     void setGestureText2(QString gesture);
     void setGestureText3(QString gesture);
@@ -60,6 +61,7 @@ private slots:
     void on_horizontalSlider_6_sliderMoved(int position);
 
     void on_pushButton_2_clicked();
+    void sendUdp(int);
 
 private:
     Ui::MainWindow *ui;

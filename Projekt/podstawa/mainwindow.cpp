@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     camImg = new videothread(this);
+    udpSocket = new QUdpSocket(this);
 
     //połączenie sygnał slot
     connect(camImg, SIGNAL(NewCamImg(QImage)), this, SLOT(onNewCamImg(QImage)));
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(camImg, &videothread::gestureDetected1, this, &MainWindow::setGestureText1);
     connect(camImg, &videothread::gestureDetected2, this, &MainWindow::setGestureText2);
     connect(camImg, &videothread::gestureDetected3, this, &MainWindow::setGestureText3);
+    connect(camImg, &videothread::y_mean_signal, this, &MainWindow::sendUdp);
 
 
 }
@@ -37,6 +39,18 @@ void MainWindow::setGestureText2(QString gesture) {
 }
 void MainWindow::setGestureText3(QString gesture) {
     ui->lineEdit_3->setText(gesture);
+}
+
+void MainWindow::sendUdp(int y) {
+
+    QString message = QString::number(y);
+    QByteArray byte2 = message.toUtf8();
+    QByteArray ByteData;
+    ByteData.append(byte2);
+    //QString message = trUtf8("%1").arg(y_mean);
+    udpSocket->writeDatagram(byte2, QHostAddress::Broadcast, 12311);
+    qDebug()<<udpSocket->writeDatagram(byte2, QHostAddress::Broadcast, 12311);
+    qDebug()<<message;
 }
 
 void MainWindow::onNewCamImg(QImage qimg)

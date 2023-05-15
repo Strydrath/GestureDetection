@@ -41,6 +41,7 @@ public:
     cv::VideoCapture capture;
     cv::Mat input_img;
 
+
     cv::Scalar min_val, max_val;
     //konversja cv::Mat na QImage
     QImage qinputimage(const cv::Mat &mat);
@@ -65,6 +66,7 @@ signals:
     void gestureDetected1(QString gesture);
     void gestureDetected2(QString gesture);
     void gestureDetected3(QString gesture);
+    void y_mean_signal(int y);
 
 };
 

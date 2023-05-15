@@ -150,7 +150,7 @@ void videothread::skin_segmentation(cv::Mat img, cv::Mat &mask, cv::Scalar min, 
 void videothread::feature_detection(cv::Mat img,cv::Mat mask, cv::Rect &rect, cv::Rect &rect2, std::vector<cv::Point> &hull_points, std::vector<cv::Point> &def_points)
 {
 
-    udpSocket = new QUdpSocket(this);
+
     //detekcja konturow
     std::vector<std::vector<cv::Point> > contours;
     cv::Mat m = mask.clone();
@@ -213,10 +213,10 @@ void videothread::feature_detection(cv::Mat img,cv::Mat mask, cv::Rect &rect, cv
     }
 
     y_mean = (y1+y3)/2;
-    QByteArray ByteData;
-    QString message = trUtf8("sensor-update info od Marcin %1").arg(y_mean);
-    ByteData.append(message);
-    udpSocket->writeDatagram(ByteData, QHostAddress::Broadcast, 42001);
+
+    emit y_mean_signal(y_mean);
+
+
 
     //detekcja wypukłości i wklęsłości konturu
     std::vector<std::vector<cv::Point> >hull( contours.size() );
@@ -382,6 +382,14 @@ int prevTime = 0; // Czas ostatniego ruchu myszy
 
 void videothread::handleMouseMove(cv::Mat img,int x, int y)
 {
+
+
+
+
+
+
+
+
     if (!swipeInProgress) {
         // Jeśli nie jest wykrywany gest swipe, zapisz bieżące współrzędne jako punkt początkowy
         startX = x;
@@ -415,11 +423,11 @@ void videothread::handleMouseMove(cv::Mat img,int x, int y)
         // Jeśli dystans jest wystarczająco duży, aby uznać go za gest swipe w lewo, wykonaj odpowiednie akcje
         if ((endX - startX) > MIN_SWIPE_DISTANCE) {
             //qDebug() << "Dynamiczny swipe w lewo wykryty!"
-            putText(img, "Wykryto gest!", cv::Point(0, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
-            QByteArray ByteData;
-            QString message = trUtf8("gest%1").arg(255);
-            ByteData.append(message);
-            udpSocket->writeDatagram(ByteData, QHostAddress::Broadcast, 42001);
+            //putText(img, "Wykryto gest!", cv::Point(0, 50), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 0, 255), 2);
+            //QByteArray ByteData;
+            //QString message = trUtf8("gest%1").arg(255);
+            //ByteData.append(message);
+            //udpSocket->writeDatagram(ByteData, QHostAddress::Broadcast, 42001);
 
         }
 
